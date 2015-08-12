@@ -2,6 +2,7 @@
 /*------- SCREEN -------*/
 
 function Screen(name) {
+
 	this.name = name.replace(/\s+/g, "");
 
 	var screen_ = document.createElement("screen");
@@ -12,13 +13,9 @@ function Screen(name) {
 	return this;
 }
 
-Screen.prototype = new Animation();
-
 /*------- LAYER -------*/
 
 function Layer(name, screen, options) {
-
-	Animation.call(this);
 
 	this.name = name.replace(/\s+/g, "");
 
@@ -32,7 +29,21 @@ function Layer(name, screen, options) {
 	return this;
 }
 
-Layer.prototype = new Animation();
+/*------- COMPONENT -------*/
+
+function Component(name, layer, options) {
+
+	this.name = name.replace(/\s+/g, "");
+
+	var component_ = document.createElement("component");
+	component_.id = this.name;
+
+	document.getElementById(layer.name).appendChild(component_);
+
+	layer[this.name] = this;
+
+	return this;
+}
 
 
 
