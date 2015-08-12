@@ -3,7 +3,7 @@
 function JSGA(options) {
 	
 	var $BASE_SCRIPT_URL = 'modules/';
-	var $REQUIRED_MODULES = ['display'];
+	var $REQUIRED_MODULES = ['animation', 'display'];
 
 	var settings = $.extend({
 		modules: ['menu'],

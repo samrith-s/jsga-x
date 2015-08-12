@@ -12,9 +12,14 @@ function Screen(name) {
 	return this;
 }
 
+Screen.prototype = new Animation();
+
 /*------- LAYER -------*/
 
 function Layer(name, screen, options) {
+
+	Animation.call(this);
+
 	this.name = name.replace(/\s+/g, "");
 
 	var layer_ = document.createElement("layer");
@@ -26,6 +31,8 @@ function Layer(name, screen, options) {
 
 	return this;
 }
+
+Layer.prototype = new Animation();
 
 
 
