@@ -4,23 +4,24 @@ function Menu(name, screen, options) {
 	this.name = name.replace(/\s+/g, "");;
 
 	var settings = $.extend({
+		dispay: "vertical",
+		col: 8,
+		row: 'auto',
 		labels: ["Start", "Instructions", "Options"],
-		width: 80,
-		height: -1
+
 	}, options);
 
-	var menu_ = document.createElement("menu");
-	menu_.id = this.name;
-	document.getElementById(screen.name).appendChild(menu_);
+	new Layer(this.name, screen, { col: settings.col, row: settings.row});
 
 	for(var i=0,len=settings.labels.length; i<len; i++) {
-		var itm = document.createElement("menu-item");
-		var itmTxt = document.createTextNode(settings.labels[i]);
-		itm.appendChild(itmTxt);
-		itm.id = this.name + "-item-" + (i+1);
-		document.getElementById(this.name).appendChild(itm);
-		this["item"+(i+1)] = $('#'+itm.id);
+		new Component(this.name + "Item" + (i+1), screen[this.name], {
+			type: "ga-menu-item",
+			classes: 'col-12',
+			text: settings.labels[i]
+		});
 	}
 
+	this.$ = $('#' + this.name);
+	
 	return this;
 }

@@ -3,10 +3,10 @@
 function JSGA(options) {
 	
 	var $BASE_SCRIPT_URL = 'modules/';
-	var $REQUIRED_MODULES = ['animation', 'display'];
+	var $REQUIRED_MODULES = ['display'];
 
 	var settings = $.extend({
-		modules: ['menu'],
+		modules: ['menu', 'currency'],
 		cache: true
 	}, options);
 
@@ -27,6 +27,4 @@ function JSGA(options) {
   		}).fail(function( jqxhr, settings, exception ) {
     		console.error( "Triggered ajaxError handler." );
 		});
-
-
 }

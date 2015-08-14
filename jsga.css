@@ -1,0 +1,73 @@
+
+html, body {
+	width:100vw;
+	height:100vh;
+	margin: 0;
+	padding: 0;
+}
+
+/*--- structure tags and classes ---*/
+
+ga-jsga {
+	width:100%;
+	height: 100%;
+	position: fixed;
+}
+
+ga-screen {
+	position: absolute;
+	width:100%;
+	height: 100%;
+	background: black;
+}
+
+ga-layer {
+	position: absolute;
+	background:green;
+}
+
+.ga-component {
+	position: absolute;
+	background: blue;
+}
+
+ga-menu-item {
+	position: relative !important;
+	display: block;
+	text-align: center;
+	margin: 1% 0;
+	padding: 1% 0;
+	cursor: pointer;
+}
+
+/*--- column classes ---*/
+
+.col-1		{ width: 8.33%; }
+.col-2		{ width: 16.66%; }
+.col-3		{ width: 24.99%; }
+.col-4		{ width: 33.32%; }
+.col-5		{ width: 41.65%; }
+.col-6		{ width: 49.98%; }
+.col-7		{ width: 58.31%; }
+.col-8		{ width: 66.64%; }
+.col-9		{ width: 74.79%; }
+.col-10		{ width: 83.33%; }
+.col-11		{ width: 91.63%; }
+.col-12 	{ width: 100%; }
+.col-auto 	{ width:auto; }
+
+/*--- row classes ---*/
+
+.row-1		{ height: 8.33%; }
+.row-2		{ height: 16.66%; }
+.row-3		{ height: 24.99%; }
+.row-4		{ height: 33.32%; }
+.row-5		{ height: 41.65%; }
+.row-6		{ height: 49.98%; }
+.row-7		{ height: 58.31%; }
+.row-8		{ height: 66.64%; }
+.row-9		{ height: 74.79%; }
+.row-10		{ height: 83.33%; }
+.row-11		{ height: 91.63%; }
+.row-12 	{ height: 100%; }
+.row-auto	{ height: auto; }
