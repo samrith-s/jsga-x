@@ -32,14 +32,16 @@ function Layer(name, screen, options) {
 
 	var settings = $.extend({
 		col: 8,
-		row: 'auto'
+		row: 'auto',
+		x: 3,
+		y: 2
 	}, options);
 
 	this.name = name.replace(/\s+/g, "");
 
 	var layer_ = document.createElement("ga-layer");
 	layer_.id = this.name;
-	layer_.className = 'col-' + settings.col + ' row-' + settings.row;
+	layer_.className = 'col-' + settings.col + ' row-' + settings.row + ' x-' + settings.x + ' y-' + settings.y;
 
 	document.getElementById(screen.name).appendChild(layer_);
 

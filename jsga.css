@@ -29,6 +29,7 @@ ga-layer {
 .ga-component {
 	position: absolute;
 	background: blue;
+	color: white;
 }
 
 ga-menu-item {
@@ -71,3 +72,63 @@ ga-menu-item {
 .row-11		{ height: 91.63%; }
 .row-12 	{ height: 100%; }
 .row-auto	{ height: auto; }
+
+/*--- x-axis classes ---*/
+
+.x-0 		{ left: 0%; }
+.x-1		{ left: 8.33%; }
+.x-2		{ left: 16.66%; }
+.x-3		{ left: 24.99%; }
+.x-4		{ left: 33.32%; }
+.x-5		{ left: 41.65%; }
+.x-6		{ left: 49.98%; }
+.x-7		{ left: 58.31%; }
+.x-8		{ left: 66.64%; }
+.x-9		{ left: 74.79%; }
+.x-10		{ left: 83.33%; }
+.x-11		{ left: 91.63%; }
+.x-12 		{ left: 100%; }
+.x-auto		{ left: auto; }
+
+/*--- y-axis classes ---*/
+
+.y-0 		{ top: 0%; }
+.y-1		{ top: 8.33%; }
+.y-2		{ top: 16.66%; }
+.y-3		{ top: 24.99%; }
+.y-4		{ top: 33.32%; }
+.y-5		{ top: 41.65%; }
+.y-6		{ top: 49.98%; }
+.y-7		{ top: 58.31%; }
+.y-8		{ top: 66.64%; }
+.y-9		{ top: 74.79%; }
+.y-10		{ top: 83.33%; }
+.y-11		{ top: 91.63%; }
+.y-12 		{ top: 100%; }
+.y-auto		{ top: auto; }
+
+/*--- position classes ---*/
+
+.pos-a { position: absolute;}
+.pos-f { position: fixed; }
+.pos-r { position: relative; }
+.pos-s { position: static; }
+
+/*--- disp classes ---*/
+
+.disp-b 	{ display: block; }
+.disp-i 	{ display: inline; }
+.disp-ib 	{ display: inline-block; }
+.disp-it 	{ display: inline-table; }
+.disp-t		{ display: table; }
+.disp-tc	{ display: table-cell; }
+
+
+
+
+
+
+
+
+
+

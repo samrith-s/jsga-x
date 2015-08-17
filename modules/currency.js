@@ -13,22 +13,27 @@ Currencies.find = function(name) {
 
 /*------- CURRENCY -------*/
 
-function Currency(name, min, max, value, callback) {
+function Currency(name, min, max, value, options) {
+
+	var settings = $.extend({
+		callback: function() {},
+		icon: ""
+	}, options);
 
 	this.name = name;
 	this.min = min;
 	this.max = max;
-	this.value = value;
+	this.val = value;
 
 	Currencies.all.push(this);
 
-	if(callback && typeof callback === 'function')
-		this.callback = callback;
-	else if(!callback)
-		this.callback = function() {};
+	if(settings.callback && typeof settings.callback === 'function')
+		this.callback = settings.callback;
 	else
 		console.error("Currency: callback is not a function");
 
+	if(settings.icon && settings.icon!=="")
+		this.icon=settings.icon
 
 	return this;
 }

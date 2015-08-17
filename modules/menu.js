@@ -1,17 +1,19 @@
 
 /*------- MENU -------*/
 function Menu(name, screen, options) {
-	this.name = name.replace(/\s+/g, "");;
+	this.name = name.replace(/\s+/g, "");
 
 	var settings = $.extend({
 		dispay: "vertical",
 		col: 8,
 		row: 'auto',
+		x: 2,
+		y: 2,
 		labels: ["Start", "Instructions", "Options"],
 
 	}, options);
 
-	new Layer(this.name, screen, { col: settings.col, row: settings.row});
+	new Layer(this.name, screen, { col: settings.col, row: settings.row, x: settings.x, y: settings.y});
 
 	for(var i=0,len=settings.labels.length; i<len; i++) {
 		new Component(this.name + "Item" + (i+1), screen[this.name], {
