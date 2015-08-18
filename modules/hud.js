@@ -1,7 +1,7 @@
 
 /*------- HUD -------*/
 
-function HUD(name, screen, options) {
+function HUD(name, screen, currencies, options) {
 
 	var settings = $.extend({
 		col: 4,
@@ -14,21 +14,22 @@ function HUD(name, screen, options) {
 
 	new Layer(this.name, screen, { col: settings.col, row: settings.row, x: settings.x, y: settings.y });
 
-	for(var i=0, len=Currencies.all.length; i<len; i++) {
-		new Component(Currencies.all[i].name + "text", screen[this.name], {
+	for(var i=0, len=currencies.length; i<len; i++) {
+		new Component(currencies[i].name + "text", screen[this.name], {
 			type: 'div',
 			classes: 'col-8 pos-r disp-ib',
-			text: Currencies.all[i].val
+			text: currencies[i].val
 		});
 
-		if(Currencies.all[i].icon && Currencies.all[i].icon!=="")
-			new Component(Currencies.all[i].name + "icon", screen[this.name], {
+		if(currencies[i].icon && currencies[i].icon!=="")
+			new Component(currencies[i].name + "icon", screen[this.name], {
 				type: 'img',
 				classes: 'col-4 pos-r disp-ib',
 				image: {
-					path: Currencies.all[i].icon
+					path: currencies[i].icon
 				}
 			});
 	}
+
 	return this;
 }

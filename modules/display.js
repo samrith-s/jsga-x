@@ -61,6 +61,14 @@ $Layers.find = function(name) {
 			return $Layers.all[i];
 }
 
+Layer.prototype.changeParent = function(current, target) {
+	document.getElementById(target.name).appendChild(document.getElementById(this.name));
+	target[this.name] = this;
+	delete current[this.name];
+	return this;
+}
+
+
 /*------- COMPONENT -------*/
 
 function Component(name, layer, options) {
@@ -109,6 +117,13 @@ $Components.find = function(name) {
 	for(var i=0,len=$Components.all.length; i<len; i++)
 		if($Components.all[i].name===name)
 			return $Components.all[i];
+}
+
+Component.prototype.changeParent = function(current, target) {
+	document.getElementById(target.name).appendChild(document.getElementById(this.name));
+	target[this.name] = this;
+	delete current[this.name];
+	return this;
 }
 
 
