@@ -13,6 +13,8 @@ function Screen(name) {
 
 	this.$ = $('#' + this.name);
 
+	this.DOM = document.getElementById(this.name);
+
 	$Screens.all.push(this);
 
 	return this;
@@ -47,6 +49,8 @@ function Layer(name, screen, options) {
 
 	screen[this.name] = this;
 	this.$ = $('#' + this.name);
+
+	this.DOM = document.getElementById(this.name);
 
 	$Layers.all.push(this);
 
@@ -105,6 +109,8 @@ function Component(name, layer, options) {
 
 	layer[this.name] = this;
 	this.$ = $('#' + this.name);
+
+	this.DOM = document.getElementById(this.name);
 
 	$Components.all.push(this);
 
