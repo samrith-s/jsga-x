@@ -1,5 +1,14 @@
 
 /*------- MENU -------*/
+/**
+ * @class
+ * 
+ *	Menu class that allows creation of new Menu with icons
+ * 
+ * @param {string} name - A unique name for the Menu
+ * @param {object} screen - Name of the screen
+ * @param {optionsHash} options
+ */
 function Menu(name, screen, options) {
 	this.name = name.replace(/\s+/g, "");
 
