@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     uglify:{
       jsga:{
         files:{
-          'build/jsga.min.js':['modules/**/*.js']
+          'build/jsga.min.js':['app/**/*.js']
         }
       }
     }

@@ -50,7 +50,7 @@ function Layer(name, screen, options) {
 
 	return this;
 }
-console.log('dispay');
+
 var $Layers = {};
 $Layers.all = [];
 $Layers.find = function(name) {
