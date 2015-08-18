@@ -13,6 +13,8 @@ function Screen(name) {
 
 	this.$ = $('#' + this.name);
 
+	this.DOM = document.getElementById(this.name);
+
 	$Screens.all.push(this);
 
 	return this;
@@ -32,19 +34,23 @@ function Layer(name, screen, options) {
 
 	var settings = $.extend({
 		col: 8,
-		row: 'auto'
+		row: 'auto',
+		x: 3,
+		y: 2
 	}, options);
 
 	this.name = name.replace(/\s+/g, "");
 
 	var layer_ = document.createElement("ga-layer");
 	layer_.id = this.name;
-	layer_.className = 'col-' + settings.col + ' row-' + settings.row;
+	layer_.className = 'col-' + settings.col + ' row-' + settings.row + ' x-' + settings.x + ' y-' + settings.y;
 
 	document.getElementById(screen.name).appendChild(layer_);
 
 	screen[this.name] = this;
 	this.$ = $('#' + this.name);
+
+	this.DOM = document.getElementById(this.name);
 
 	$Layers.all.push(this);
 
@@ -58,6 +64,14 @@ $Layers.find = function(name) {
 		if($Layers.all[i].name===name)
 			return $Layers.all[i];
 }
+
+Layer.prototype.changeParent = function(current, target) {
+	document.getElementById(target.name).appendChild(document.getElementById(this.name));
+	target[this.name] = this;
+	delete current[this.name];
+	return this;
+}
+
 
 /*------- COMPONENT -------*/
 
@@ -96,6 +110,8 @@ function Component(name, layer, options) {
 	layer[this.name] = this;
 	this.$ = $('#' + this.name);
 
+	this.DOM = document.getElementById(this.name);
+
 	$Components.all.push(this);
 
 	return this;
@@ -107,6 +123,13 @@ $Components.find = function(name) {
 	for(var i=0,len=$Components.all.length; i<len; i++)
 		if($Components.all[i].name===name)
 			return $Components.all[i];
+}
+
+Component.prototype.changeParent = function(current, target) {
+	document.getElementById(target.name).appendChild(document.getElementById(this.name));
+	target[this.name] = this;
+	delete current[this.name];
+	return this;
 }
 
 
