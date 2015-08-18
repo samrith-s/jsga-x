@@ -1,0 +1,28 @@
+{
+  "name": "jsga",
+  "version": "0.0.1",
+  "description": "The Javascript Game Adapter for Amplayfier and Quodeck",
+  "main": "jsga.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ptotem/jsga.git"
+  },
+  "keywords": [
+    "game",
+    "adapter",
+    "js",
+    "javascript"
+  ],
+  "author": "Ptotem",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ptotem/jsga/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-uglify": "~0.9.1"
+  }
+}
