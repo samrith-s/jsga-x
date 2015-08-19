@@ -9,17 +9,25 @@ module.exports = function(grunt) {
         }
       }
     },
-    jsdoc:{
+    pkg: grunt.file.readJSON('package.json'),
+    docs:{
       jsga:{
-        src:['app/**/*.js'],
+        files:[{src:'app/'}],
+        name: '<%= pkg.name %>',
+        description: '<%= pkg.description %>',
+        version: '<%= pkg.version %>',
+        logo: '<%= pkg.logo %>',
         options:{
-          destination: 'docs/'
+          linkNatives: true,
+          outdir: '../docs/',
+          themedir:'node_modules/yuidoc-bootstrap-theme',
+          helpers: ["node_modules/yuidoc-bootstrap-theme/helpers/helpers.js"]
         }
       }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-jsdoc');
+  grunt.loadNpmTasks('grunt-build-docs');
 
 };

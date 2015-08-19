@@ -1,7 +1,8 @@
 {
   "name": "jsga",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "The Javascript Game Adapter for Amplayfier and Quodeck",
+  "logo": "http://icons.iconarchive.com/icons/icons8/windows-8/256/Industry-Circuit-icon.png",
   "main": "jsga.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,7 +24,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.5",
-    "grunt-contrib-uglify": "~0.9.1",
-    "grunt-jsdoc": "~0.6.7"
+    "grunt-build-docs": "^0.4.0-rc7",
+    "grunt-contrib-uglify": "~0.9.1"
   }
 }

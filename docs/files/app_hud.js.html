@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>app/hud.js - jsga</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="jsga" src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Industry-Circuit-icon.png" style="max-height: 65%;" title="jsga">
+        
+            jsga
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.6</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes..." data-obj='["classes/Component", "classes/Currency", "classes/HUD", "classes/Layer", "classes/Menu", "classes/Screen", "classes/Timer", "classes/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>Classes</h3>
+    <div id="sidebar">
+        
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter Classes">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Component.html">Component</a></li>
+                    
+                        <li><a href="../classes/Currency.html">Currency</a></li>
+                    
+                        <li><a href="../classes/HUD.html">HUD</a></li>
+                    
+                        <li><a href="../classes/Layer.html">Layer</a></li>
+                    
+                        <li><a href="../classes/Menu.html">Menu</a></li>
+                    
+                        <li><a href="../classes/Screen.html">Screen</a></li>
+                    
+                        <li><a href="../classes/Timer.html">Timer</a></li>
+                    
+                        <li><a href="../classes/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>app/hud.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+
+/**
+ * HUD class allows creation of new HUD 
+ *
+ * @class  HUD
+ * 
+ * @param {string} name - A unique name for the component
+ * @param {object} target - A screen or layer object to add the component to
+ * @param {array} currencies - An array of currency objects
+ * @param {object} [options] A JSON object of options
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 100);
+ * 	var mana = new Currency(&#x27;mana&#x27;, 0, 100, 100);
+ * 	var hud = new HUD(&#x27;myHUD&#x27;, scrn, [health, mana], {col: 12, row:&#x27;auto&#x27;, x:0, y:0});
+ */
+function HUD(name, screen, currencies, options) {
+
+	var settings = $.extend({
+		col: 4,
+		row: &#x27;auto&#x27;,
+		x: 7,
+		y: 1
+	}, options);
+
+	this.name  = name.replace(/\s+/g, &quot;&quot;);
+
+	new Layer(this.name, screen, { col: settings.col, row: settings.row, x: settings.x, y: settings.y });
+
+	for(var i=0, len=currencies.length; i&lt;len; i++) {
+		new Component(currencies[i].name + &quot;text&quot;, screen[this.name], {
+			type: &#x27;div&#x27;,
+			classes: &#x27;col-8 pos-r disp-ib&#x27;,
+			text: currencies[i].val
+		});
+
+		if(currencies[i].icon &amp;&amp; currencies[i].icon!==&quot;&quot;)
+			new Component(currencies[i].name + &quot;icon&quot;, screen[this.name], {
+				type: &#x27;img&#x27;,
+				classes: &#x27;col-4 pos-r disp-ib&#x27;,
+				image: {
+					path: currencies[i].icon
+				}
+			});
+	}
+
+	return this;
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

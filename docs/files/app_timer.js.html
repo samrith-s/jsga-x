@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>app/timer.js - jsga</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="jsga" src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Industry-Circuit-icon.png" style="max-height: 65%;" title="jsga">
+        
+            jsga
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.6</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes..." data-obj='["classes/Component", "classes/Currency", "classes/HUD", "classes/Layer", "classes/Menu", "classes/Screen", "classes/Timer", "classes/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>Classes</h3>
+    <div id="sidebar">
+        
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter Classes">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Component.html">Component</a></li>
+                    
+                        <li><a href="../classes/Currency.html">Currency</a></li>
+                    
+                        <li><a href="../classes/HUD.html">HUD</a></li>
+                    
+                        <li><a href="../classes/Layer.html">Layer</a></li>
+                    
+                        <li><a href="../classes/Menu.html">Menu</a></li>
+                    
+                        <li><a href="../classes/Screen.html">Screen</a></li>
+                    
+                        <li><a href="../classes/Timer.html">Timer</a></li>
+                    
+                        <li><a href="../classes/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>app/timer.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+
+/**
+ * Timer class that allows creation of new Timer
+ * 
+ * @class Timer 
+ * @param {string} name - A unique name for the HUD
+ * @param {int} duration - Max value of the timer
+ * @param {bool} countdown - Set if timer is countdown
+ * @constructor
+ * @return {object} Current object after updating
+ * @example
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ */
+function Timer(name, duration, countdown) {
+
+	if(duration===0 &amp;&amp; countdown)
+		console.error(&quot;Zero timers cannot be countdown timers&quot;);
+	else {
+		this.name = name.replace(/\s+/g, &quot;&quot;);
+		this.duration = duration;
+		this.countdown = countdown;
+	
+		if(this.countdown)
+			this.value = parseInt(this.duration);
+		else
+			this.value = 0;
+
+		console.log(this.value);
+	
+		return this;
+	}
+}
+
+/**
+ * Start the timer
+ *
+ * @method  start
+ * @return {object} Currenct object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ * 	timr.start();
+ */
+Timer.prototype.start = function() {
+	var $this = this;
+
+	var $do;
+
+
+	if(this.countdown)
+		$do = function() { $this.value-=1; }
+	else
+		$do = function() { $this.value+=1; }
+
+	this.start = setInterval(function() {
+		$do();
+
+		if($this.value%$this.periodicInterval===0)
+			$this.onChangeFunct();
+
+		document.getElementById($this.textBox).innerHTML = $this.value;
+
+		if((!$this.countdown &amp;&amp; $this.value===$this.duration) || ($this.countdown &amp;&amp; $this.value===0))
+			$this.stop();
+
+	}, 1000);
+
+	return this;
+}
+
+/**
+ * Stop the timer
+ *
+ * @method  stop
+ * @return {object} Currenct object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ * 	timr.stop();
+ */
+Timer.prototype.stop = function() {
+	clearInterval(this.start);
+	this.onEnd();
+	return this;
+}
+
+/**
+ * Function to return current value of timer
+ *
+ * @method  val
+ * @return {int} Current value of the timer
+ * @readOnly
+ * @example
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ * 	var timrVal = timr.val();
+ */
+Timer.prototype.val = function() {
+	return this.value;
+}
+
+/**
+ * Adding a callback function on end of the timer
+ *
+ * @method  onEnd
+ * @param {function} callback - Name of function to call
+ * @return {object} Current object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ * 	timr.onEnd(function() {
+ * 		alert(&quot;Timer has ended!&quot;);
+ * 	});
+ */
+Timer.prototype.onEnd = function(callback) {
+	if(!callback)
+		this.onEnd = function() {};
+	else
+		this.onEnd = callback;
+
+	return this;
+}
+
+/**
+ * Run callback on given interval on change of the timer
+ *
+ * @method  onChange
+ * @param {int} interval - Timer interval on change
+ * @param {function} callback - Name of function to call
+ * @return {object} Current object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ * 	timr.onChange(2, function() {
+ * 		alert(&quot;This will be displayed every 2 seconds&quot;); 
+ * 	});
+ */
+Timer.prototype.onChange = function(interval, callback) {
+
+	if(!callback)
+		callback = function() {};
+	
+	this.periodicInterval = interval;
+	this.onChangeFunct = callback;
+
+	return this;
+}
+
+/**
+ * Display the timer in a specific layer or screen object
+ *
+ * @method  display
+ * @param {object} target - Screen or layer object to embed the timer in
+ * @param {optionsHash} options
+ * @return {object} Current object after updating
+ * @chainable
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ * 	var timr = new Timer(&#x27;myTimer&#x27;, 10, true);
+ * 	timr.display(scrn, {col:2, row:5, x:3, y:2});
+ */
+Timer.prototype.display = function(target, options) {
+
+	var settings = $.extend({
+		showIcon: false,
+		iconPath: &quot;http://icons.iconarchive.com/icons/custom-icon-design/flatastic-11/256/Arrows-icon.png&quot;,
+		col: 3,
+		row: &#x27;auto&#x27;,
+		x: 8,
+		y: 0
+	}, options);
+
+	new Layer(this.name, target, {col:settings.col, row: settings.row, x: settings.x, y: settings.y});
+
+	new Component(this.name+&quot;Text&quot;, target[this.name], {
+		type: &#x27;span&#x27;,
+		classes: &#x27;col-8&#x27;,
+		text: this.value
+	});
+
+	
+	if(settings.showIcon)
+		new Component(this.name+&quot;Icon&quot;, target[this.name], {
+			type: &#x27;img&#x27;,
+			classes: &#x27;col-4&#x27;,
+			image: {
+				path: settings.iconPath
+			}
+		});
+
+	this.textBox = this.name+&quot;Text&quot;;
+
+	return this;
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

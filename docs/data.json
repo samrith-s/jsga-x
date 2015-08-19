@@ -1,0 +1,717 @@
+{
+    "project": {
+        "name": "jsga",
+        "description": "The Javascript Game Adapter for Amplayfier and Quodeck",
+        "version": "0.0.6",
+        "logo": "http://icons.iconarchive.com/icons/icons8/windows-8/256/Industry-Circuit-icon.png"
+    },
+    "files": {
+        "app/currency.js": {
+            "name": "app/currency.js",
+            "modules": {},
+            "classes": {
+                "Currency": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "app/display.js": {
+            "name": "app/display.js",
+            "modules": {},
+            "classes": {
+                "Screen": 1,
+                "Layer": 1,
+                "Component": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "app/hud.js": {
+            "name": "app/hud.js",
+            "modules": {},
+            "classes": {
+                "HUD": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "app/menu.js": {
+            "name": "app/menu.js",
+            "modules": {},
+            "classes": {
+                "Menu": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "app/timer.js": {
+            "name": "app/timer.js",
+            "modules": {},
+            "classes": {
+                "Timer": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "app/util.js": {
+            "name": "app/util.js",
+            "modules": {},
+            "classes": {
+                "Util": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Currency": {
+            "name": "Currency",
+            "shortname": "Currency",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/currency.js",
+            "line": 12,
+            "description": "Currency class that allows creation of new currencies like health, coins etc and allows effective management. Part of the game logic element.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the currency",
+                    "type": "String"
+                },
+                {
+                    "name": "min",
+                    "description": "- Minimum value of currency",
+                    "type": "Int"
+                },
+                {
+                    "name": "max",
+                    "description": "- Maximum value of currency",
+                    "type": "Int"
+                },
+                {
+                    "name": "value",
+                    "description": "- Value to initialize currency with",
+                    "type": "Int"
+                },
+                {
+                    "name": "options",
+                    "description": "- Pass a JSON object of options",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar health = new Currency('health', 0, 100, 100, {callback: myFunct(), icon:'../../myicon.png'});"
+            ]
+        },
+        "Screen": {
+            "name": "Screen",
+            "shortname": "Screen",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/display.js",
+            "line": 2,
+            "description": "Screen class that allows creation of new screens",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the screen",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "is_constructor": 1,
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');"
+            ]
+        },
+        "Layer": {
+            "name": "Layer",
+            "shortname": "Layer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/display.js",
+            "line": 41,
+            "description": "Layer class that allows creation of new layers",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the layer",
+                    "type": "String"
+                },
+                {
+                    "name": "target",
+                    "description": "- A screen or layer object to add the layer to",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "- A JSON object of options",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "is_constructor": 1,
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar layr = new Layer('myScreen', scrn, {col:12, row: 'auto', x:0, y:0});"
+            ]
+        },
+        "Component": {
+            "name": "Component",
+            "shortname": "Component",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/display.js",
+            "line": 112,
+            "description": "Component class allows creation of new components",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the component",
+                    "type": "String"
+                },
+                {
+                    "name": "target",
+                    "description": "- A screen or layer object to add the component to",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "- A JSON object of options",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "is_constructor": 1,
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar layr = new Layer('myScreen', scrn);\n\tvar myComp = new Component('myComponent', layr, {\n\t\ttype: 'img',\n\t\tclasses: 'class1 class2',\n\t\timage: {\n\t\t\tpath:'path/to/img.png',\n\t\t\talt: 'alt Img Name',\n\t\t\ttitle: 'title of image'\n\t\t}\n\t});"
+            ]
+        },
+        "HUD": {
+            "name": "HUD",
+            "shortname": "HUD",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/hud.js",
+            "line": 2,
+            "description": "HUD class allows creation of new HUD",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the component",
+                    "type": "String"
+                },
+                {
+                    "name": "target",
+                    "description": "- A screen or layer object to add the component to",
+                    "type": "Object"
+                },
+                {
+                    "name": "currencies",
+                    "description": "- An array of currency objects",
+                    "type": "Array"
+                },
+                {
+                    "name": "options",
+                    "description": "A JSON object of options",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "is_constructor": 1,
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar health = new Currency('health', 0, 100, 100);\n\tvar mana = new Currency('mana', 0, 100, 100);\n\tvar hud = new HUD('myHUD', scrn, [health, mana], {col: 12, row:'auto', x:0, y:0});"
+            ]
+        },
+        "Menu": {
+            "name": "Menu",
+            "shortname": "Menu",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/menu.js",
+            "line": 2,
+            "description": "Menu class that allows creation of new Menu with icons",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the Menu",
+                    "type": "String"
+                },
+                {
+                    "name": "screen",
+                    "description": "- Name of the screen",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "- Pass a JSON object of options",
+                    "type": "Object"
+                }
+            ],
+            "itemtype": "property",
+            "type": "Object",
+            "is_constructor": 1,
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar mnu = new Menu('mainMenu', scrn, {col: 8, row: 'auto', x:2, y:2});"
+            ]
+        },
+        "Timer": {
+            "name": "Timer",
+            "shortname": "Timer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/timer.js",
+            "line": 2,
+            "description": "Timer class that allows creation of new Timer",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "- A unique name for the HUD",
+                    "type": "String"
+                },
+                {
+                    "name": "duration",
+                    "description": "- Max value of the timer",
+                    "type": "Int"
+                },
+                {
+                    "name": "countdown",
+                    "description": "- Set if timer is countdown",
+                    "type": "Bool"
+                }
+            ],
+            "is_constructor": 1,
+            "return": {
+                "description": "Current object after updating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar timr = new Timer('myTimer', 10, true);"
+            ]
+        },
+        "Util": {
+            "name": "Util",
+            "shortname": "Util",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "app/util.js",
+            "line": 2,
+            "description": "Utility module that provides useful functions."
+        }
+    },
+    "classitems": [
+        {
+            "file": "app/currency.js",
+            "line": 50,
+            "description": "Function to increase the currency by a certain value",
+            "itemtype": "method",
+            "name": "increase",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "- Value to increase currency by",
+                    "type": "Int"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "Current object after updating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar health = new Currency('health', 0, 100. 0);\n\thealth.increase(10); //increases health from 0 -> 10"
+            ],
+            "class": "Currency"
+        },
+        {
+            "file": "app/currency.js",
+            "line": 68,
+            "description": "Function to decrease the currency by a certain value",
+            "itemtype": "method",
+            "name": "decrease",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "- Value to decrease currency by",
+                    "type": "Int"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "Current object after updating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar health = new Currency('health', 0, 100, 10);\n\thealth.decrease(10); //decrease health from 10->0"
+            ],
+            "class": "Currency"
+        },
+        {
+            "file": "app/currency.js",
+            "line": 86,
+            "description": "Function to check if value of currency is equal to it's maximum value",
+            "itemtype": "method",
+            "name": "isMax",
+            "return": {
+                "description": "Returns either true or false",
+                "type": "Bool"
+            },
+            "readonly": "",
+            "example": [
+                "\n\tvar health = new Currency('health', 0, 100, 10);\n\tvar isMx = health.isMax(); //will return true or false after checking"
+            ],
+            "class": "Currency"
+        },
+        {
+            "file": "app/currency.js",
+            "line": 103,
+            "description": "Function to check if value of currency is equal to it's minimum value",
+            "itemtype": "method",
+            "name": "isMin",
+            "return": {
+                "description": "Returns either true or false",
+                "type": "Bool"
+            },
+            "readonly": "",
+            "example": [
+                "\n\tvar health = new Currency('health', 0, 100, 10);\n\tvar isMn = health.isMin(); //will return true or false after checking"
+            ],
+            "class": "Currency"
+        },
+        {
+            "file": "app/currency.js",
+            "line": 120,
+            "description": "Function to check if value of currency is equal to it's minimum value",
+            "itemtype": "method",
+            "name": "val",
+            "return": {
+                "description": "Returns the current value of the currency",
+                "type": "Int"
+            },
+            "readonly": "",
+            "example": [
+                "\n\tvar health = new Currency('health', 0, 100, 10);\n\tvar isMn = health.val(); //will return the current value"
+            ],
+            "class": "Currency"
+        },
+        {
+            "file": "app/display.js",
+            "line": 92,
+            "description": "Change the current parent container of the layer or component object",
+            "itemtype": "method",
+            "name": "changeParent",
+            "params": [
+                {
+                    "name": "current",
+                    "description": "- The current parent (screen or layer) object",
+                    "type": "Object"
+                },
+                {
+                    "name": "target",
+                    "description": "- The target screen or layer object",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar scrn2 = new Screen('myOtherScreen');\n\tvar layr = new Layer('myLayer', scrn);\n\tlayr.changeParent(scrn, scrn2);"
+            ],
+            "class": "Layer"
+        },
+        {
+            "file": "app/display.js",
+            "line": 187,
+            "description": "Change the current parent container of the layer or component object",
+            "itemtype": "method",
+            "name": "changeParent",
+            "params": [
+                {
+                    "name": "current",
+                    "description": "- The current parent (screen or layer) object",
+                    "type": "Object"
+                },
+                {
+                    "name": "target",
+                    "description": "- The target screen or layer object",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "Current object after creating",
+                "type": "Object"
+            },
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar scrn2 = new Screen('myOtherScreen');\n\tvar myComp = new Component('myComp', scrn, {\n\t\ttype: 'img',\n\t\tclasses: 'class1 class2',\n\t\timage: {\n\t\t\tpath:'path/to/img.png',\n\t\t\talt: 'alt Img Name',\n\t\t\ttitle: 'title of image'\n\t\t}\n\t});\n\tmyComp.changeParent(scrn, scrn2);"
+            ],
+            "class": "Component"
+        },
+        {
+            "file": "app/timer.js",
+            "line": 34,
+            "description": "Start the timer",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "Currenct object after updating",
+                "type": "Object"
+            },
+            "chainable": 1,
+            "example": [
+                "\n\tvar timr = new Timer('myTimer', 10, true);\n\ttimr.start();"
+            ],
+            "class": "Timer"
+        },
+        {
+            "file": "app/timer.js",
+            "line": 71,
+            "description": "Stop the timer",
+            "itemtype": "method",
+            "name": "stop",
+            "return": {
+                "description": "Currenct object after updating",
+                "type": "Object"
+            },
+            "chainable": 1,
+            "example": [
+                "\n\tvar timr = new Timer('myTimer', 10, true);\n\ttimr.stop();"
+            ],
+            "class": "Timer"
+        },
+        {
+            "file": "app/timer.js",
+            "line": 87,
+            "description": "Function to return current value of timer",
+            "itemtype": "method",
+            "name": "val",
+            "return": {
+                "description": "Current value of the timer",
+                "type": "Int"
+            },
+            "readonly": "",
+            "example": [
+                "\n\tvar timr = new Timer('myTimer', 10, true);\n\tvar timrVal = timr.val();"
+            ],
+            "class": "Timer"
+        },
+        {
+            "file": "app/timer.js",
+            "line": 101,
+            "description": "Adding a callback function on end of the timer",
+            "itemtype": "method",
+            "name": "onEnd",
+            "params": [
+                {
+                    "name": "callback",
+                    "description": "- Name of function to call",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Current object after updating",
+                "type": "Object"
+            },
+            "chainable": 1,
+            "example": [
+                "\n\tvar timr = new Timer('myTimer', 10, true);\n\ttimr.onEnd(function() {\n\t\talert(\"Timer has ended!\");\n\t});"
+            ],
+            "class": "Timer"
+        },
+        {
+            "file": "app/timer.js",
+            "line": 123,
+            "description": "Run callback on given interval on change of the timer",
+            "itemtype": "method",
+            "name": "onChange",
+            "params": [
+                {
+                    "name": "interval",
+                    "description": "- Timer interval on change",
+                    "type": "Int"
+                },
+                {
+                    "name": "callback",
+                    "description": "- Name of function to call",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "Current object after updating",
+                "type": "Object"
+            },
+            "chainable": 1,
+            "example": [
+                "\n\tvar timr = new Timer('myTimer', 10, true);\n\ttimr.onChange(2, function() {\n\t\talert(\"This will be displayed every 2 seconds\"); \n\t});"
+            ],
+            "class": "Timer"
+        },
+        {
+            "file": "app/timer.js",
+            "line": 148,
+            "description": "Display the timer in a specific layer or screen object",
+            "itemtype": "method",
+            "name": "display",
+            "params": [
+                {
+                    "name": "target",
+                    "description": "- Screen or layer object to embed the timer in",
+                    "type": "Object"
+                },
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "OptionsHash"
+                }
+            ],
+            "return": {
+                "description": "Current object after updating",
+                "type": "Object"
+            },
+            "chainable": 1,
+            "example": [
+                "\n\tvar scrn = new Screen('myScreen');\n\tvar timr = new Timer('myTimer', 10, true);\n\ttimr.display(scrn, {col:2, row:5, x:3, y:2});"
+            ],
+            "class": "Timer"
+        },
+        {
+            "file": "app/util.js",
+            "line": 10,
+            "description": "Array shuffling function",
+            "itemtype": "method",
+            "name": "shuffle",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "- Any array object",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "Shuffled array",
+                "type": "Array"
+            },
+            "example": [
+                "\n\tvar arr = [1,2,3,4,5];\n\tarr = Util.shuffle(arr); //returns shuffled array"
+            ],
+            "class": "Util"
+        },
+        {
+            "file": "app/util.js",
+            "line": 25,
+            "description": "Random number generator after accepting a lower and an upper limit.",
+            "itemtype": "method",
+            "name": "randomNumber",
+            "params": [
+                {
+                    "name": "min",
+                    "description": "- Lower limit",
+                    "type": "Int"
+                },
+                {
+                    "name": "max",
+                    "description": "- Upper limit",
+                    "type": "Int"
+                }
+            ],
+            "return": {
+                "description": "A random number between the lower and upper limits",
+                "type": "Int"
+            },
+            "example": [
+                "\n\tvar randNum = Util.randomNumber(2,5); //returns random number between 2 and 5"
+            ],
+            "class": "Util"
+        },
+        {
+            "file": "app/util.js",
+            "line": 39,
+            "description": "Pass an array and get a random element.",
+            "itemtype": "method",
+            "name": "randomElement",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "- Any array object",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "A random element from the array",
+                "type": "Element"
+            },
+            "example": [
+                "\n\tvar arr = [1,2,3,4,5];\n\tvar randElem = Util.randomElement(arr); //returns random element like array[i]"
+            ],
+            "class": "Util"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app/currency.js:12"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app/util.js:10"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app/util.js:25"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " app/util.js:39"
+        }
+    ]
+}

@@ -1,15 +1,16 @@
 
-/*------- TIMER -------*/
 /**
- * @class
+ * Timer class that allows creation of new Timer
  * 
- *	Timer class that allows creation of new Timer 
- * 
+ * @class Timer 
  * @param {string} name - A unique name for the HUD
  * @param {int} duration - Max value of the timer
  * @param {bool} countdown - Set if timer is countdown
+ * @constructor
+ * @return {object} Current object after updating
+ * @example
+ * 	var timr = new Timer('myTimer', 10, true);
  */
-
 function Timer(name, duration, countdown) {
 
 	if(duration===0 && countdown)
@@ -29,13 +30,17 @@ function Timer(name, duration, countdown) {
 		return this;
 	}
 }
-/**
- * @function
- * 
- *	Function to start the timer
- * 
- */
 
+/**
+ * Start the timer
+ *
+ * @method  start
+ * @return {object} Currenct object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer('myTimer', 10, true);
+ * 	timr.start();
+ */
 Timer.prototype.start = function() {
 	var $this = this;
 
@@ -64,10 +69,14 @@ Timer.prototype.start = function() {
 }
 
 /**
- * @function
- * 
- *	Function to stop the timer
- * 
+ * Stop the timer
+ *
+ * @method  stop
+ * @return {object} Currenct object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer('myTimer', 10, true);
+ * 	timr.stop();
  */
 Timer.prototype.stop = function() {
 	clearInterval(this.start);
@@ -76,24 +85,32 @@ Timer.prototype.stop = function() {
 }
 
 /**
- * @function
- * 
- *	Function to return current value of timer
- * 
+ * Function to return current value of timer
+ *
+ * @method  val
+ * @return {int} Current value of the timer
+ * @readOnly
+ * @example
+ * 	var timr = new Timer('myTimer', 10, true);
+ * 	var timrVal = timr.val();
  */
-
 Timer.prototype.val = function() {
 	return this.value;
 }
 
 /**
- * @function
- * 
- *	Function to callback the function on end of the timer
+ * Adding a callback function on end of the timer
  *
+ * @method  onEnd
  * @param {function} callback - Name of function to call
+ * @return {object} Current object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer('myTimer', 10, true);
+ * 	timr.onEnd(function() {
+ * 		alert("Timer has ended!");
+ * 	});
  */
-
 Timer.prototype.onEnd = function(callback) {
 	if(!callback)
 		this.onEnd = function() {};
@@ -104,14 +121,19 @@ Timer.prototype.onEnd = function(callback) {
 }
 
 /**
- * @function
- * 
- *	Function to callback the function on given interval on change of the timer
+ * Run callback on given interval on change of the timer
  *
+ * @method  onChange
  * @param {int} interval - Timer interval on change
  * @param {function} callback - Name of function to call
+ * @return {object} Current object after updating
+ * @chainable
+ * @example
+ * 	var timr = new Timer('myTimer', 10, true);
+ * 	timr.onChange(2, function() {
+ * 		alert("This will be displayed every 2 seconds"); 
+ * 	});
  */
-
 Timer.prototype.onChange = function(interval, callback) {
 
 	if(!callback)
@@ -122,13 +144,19 @@ Timer.prototype.onChange = function(interval, callback) {
 
 	return this;
 }
+
 /**
- * @function
- * 
- *	Function to diaplay the timer
+ * Display the timer in a specific layer or screen object
  *
- * @param {object} target - Target timer object to display
+ * @method  display
+ * @param {object} target - Screen or layer object to embed the timer in
  * @param {optionsHash} options
+ * @return {object} Current object after updating
+ * @chainable
+ * @example
+ * 	var scrn = new Screen('myScreen');
+ * 	var timr = new Timer('myTimer', 10, true);
+ * 	timr.display(scrn, {col:2, row:5, x:3, y:2});
  */
 Timer.prototype.display = function(target, options) {
 

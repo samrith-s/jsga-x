@@ -1,42 +1,51 @@
 
-var Util = {};		//Array of all created Util
+/**
+ * Utility module that provides useful functions.
+ * @class Util
+ */
+
+var Util = {};
 
 
 /**
- * @function
- * 
- *	Function to shuffle the array
+ * Array shuffling function
  *
- * @param {array} array - Name of the array
+ * @method shuffle
+ * @param {array} array - Any array object
+ * @returns {array} Shuffled array
+ * @example
+ * 	var arr = [1,2,3,4,5];
+ * 	arr = Util.shuffle(arr); //returns shuffled array
  */
-
 Util.shuffle = function(array){
     for(var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
     return array;
 }
 
 /**
- * @function
- * 
- *	Function to randomize the number in min and max limit
+ * Random number generator after accepting a lower and an upper limit.
  *
- * @param {int} min - Min value
- * @param {int} max - Max value
+ * @method randomNumber
+ * @param {int} min - Lower limit
+ * @param {int} max - Upper limit
+ * @returns {int} A random number between the lower and upper limits
+ * @example
+ * 	var randNum = Util.randomNumber(2,5); //returns random number between 2 and 5
  */
-
-Util.random = function(min, max) {
+Util.randomNumber = function(min, max) {
 	return Math.floor(Math.random()*(max-min+1)+min);
 }
 
 /**
- * @function
- * 
- *	Function to select the random element
+ * Pass an array and get a random element.
  *
- * @param {array} array - Name of the array
+ * @method randomElement
+ * @param {array} array - Any array object
+ * @returns {element} A random element from the array
+ * @example
+ * 	var arr = [1,2,3,4,5];
+ * 	var randElem = Util.randomElement(arr); //returns random element like array[i]
  */
-
-
 Util.randomElement = function(array) {
 	return array[Math.floor(Math.random()*(array.length+1))];
 }

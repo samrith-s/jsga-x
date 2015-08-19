@@ -1,14 +1,20 @@
 
-/*------- HUD -------*/
 /**
- * @class
+ * HUD class allows creation of new HUD 
+ *
+ * @class  HUD
  * 
- *	HUD class that allows creation of HUDs with currencies
- * 
- * @param {string} name - A unique name for the HUD
- * @param {object} screen - Screen or layer element to place the HUD
- * @param {array} curriences - Array of currencies to display the HUD
- * @param {optionsHash} options
+ * @param {string} name - A unique name for the component
+ * @param {object} target - A screen or layer object to add the component to
+ * @param {array} currencies - An array of currency objects
+ * @param {object} [options] A JSON object of options
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen('myScreen');
+ * 	var health = new Currency('health', 0, 100, 100);
+ * 	var mana = new Currency('mana', 0, 100, 100);
+ * 	var hud = new HUD('myHUD', scrn, [health, mana], {col: 12, row:'auto', x:0, y:0});
  */
 function HUD(name, screen, currencies, options) {
 

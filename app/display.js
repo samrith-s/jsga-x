@@ -1,12 +1,14 @@
 
-
-/*------- SCREEN -------*/
 /**
- * @class
- * 
- *	Screen class that allows creation of new screen 
+ * Screen class that allows creation of new screens
+ *
+ * @class  Screen
  * 
  * @param {string} name - A unique name for the screen
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen('myScreen');
  */
 function Screen(name) {
 
@@ -29,37 +31,34 @@ function Screen(name) {
 var $Screens = {};		//Global variable containing all screen
 $Screens.all = [];		//Array of all created screens
 
-/**
- * @function
- * 
- *	Function to find Screen by name
- * 
- * @param {string} name - Name of the screen
- */
+//a function to find screen by name from all screens created
 $Screens.find = function(name) {
 	for(var i=0,len=$Screens.all.length; i<len; i++)
 		if($Screens.all[i].name===name)
 			return $Screens.all[i];
 }
 
-/*------- LAYER -------*/
-
 /**
- * @class
- * 
- *	Layer class that allows creation of new layer 
+ * Layer class that allows creation of new layers 
+ *
+ * @class  Layer
  * 
  * @param {string} name - A unique name for the layer
- * @param {object} screen - Screen or layer element to place the Layer
- * @param {optionsHash} options
+ * @param {object} target - A screen or layer object to add the layer to
+ * @param {object} [options] - A JSON object of options
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen('myScreen');
+ * 	var layr = new Layer('myScreen', scrn, {col:12, row: 'auto', x:0, y:0});
  */
 function Layer(name, screen, options) {
 
 	var settings = $.extend({
-		col: 8,
+		col: 12,
 		row: 'auto',
-		x: 3,
-		y: 2
+		x: 0,
+		y: 0
 	}, options);
 
 	this.name = name.replace(/\s+/g, "");
@@ -83,25 +82,25 @@ function Layer(name, screen, options) {
 var $Layers = {};		//Global variable containing all Layer
 $Layers.all = [];		//Array of all created layers		
 
-/**
- * @function
- * 
- *	Function to find Layer by name
- * 
- * @param {string} name - Name of the Layer
- */
+//a function to find screen by name from all screens created
 $Layers.find = function(name) {
 	for(var i=0,len=$Layers.all.length; i<len; i++)
 		if($Layers.all[i].name===name)
 			return $Layers.all[i];
 }
+
 /**
- * @function
- * 
- *	Function to change the parent container of the layer
- * 
- * @param {object} current - Current parent container object
- * @param {object} target - Target parent conrainer object
+ * Change the current parent container of the layer or component object
+ *
+ * @method changeParent
+ * @param {object} current - The current parent (screen or layer) object
+ * @param {object} target - The target screen or layer object
+ * @return {object} Current object after creating
+ * @example
+ * 	var scrn = new Screen('myScreen');
+ * 	var scrn2 = new Screen('myOtherScreen');
+ * 	var layr = new Layer('myLayer', scrn);
+ * 	layr.changeParent(scrn, scrn2);
  */
 Layer.prototype.changeParent = function(current, target) {
 	document.getElementById(target.name).appendChild(document.getElementById(this.name));
@@ -110,16 +109,28 @@ Layer.prototype.changeParent = function(current, target) {
 	return this;
 }
 
-
-/*------- COMPONENT -------*/
 /**
- * @class
- * 
- *	Component class that allows creation of new Component 
+ * Component class allows creation of new components 
+ *
+ * @class  Component
  * 
  * @param {string} name - A unique name for the component
- * @param {object} layer - Screen or layer element to place the component
- * @param {optionsHash} options
+ * @param {object} target - A screen or layer object to add the component to
+ * @param {object} [options] - A JSON object of options
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen('myScreen');
+ * 	var layr = new Layer('myScreen', scrn);
+ * 	var myComp = new Component('myComponent', layr, {
+ * 		type: 'img',
+ * 		classes: 'class1 class2',
+ * 		image: {
+ * 			path:'path/to/img.png',
+ * 			alt: 'alt Img Name',
+ * 			title: 'title of image'
+ * 		}
+ * 	});
  */
 function Component(name, layer, options) {
 
@@ -166,14 +177,7 @@ function Component(name, layer, options) {
 var $Components = {};		//Global variable containing all Component
 $Components.all = [];		//Array of all created component
 
-/**
- * @function
- * 
- *	Function to find component by name
- * 
- * @param {string} name - Name of the component
- */
-
+//a function to find screen by name from all screens created
 $Components.find = function(name) {
 	for(var i=0,len=$Components.all.length; i<len; i++)
 		if($Components.all[i].name===name)
@@ -181,14 +185,26 @@ $Components.find = function(name) {
 }
 
 /**
- * @function
- * 
- *	Function to change the parent container of the component
- * 
- * @param {object} current - Current parent container object
- * @param {object} target - Target parent container object
+ * Change the current parent container of the layer or component object
+ *
+ * @method changeParent
+ * @param {object} current - The current parent (screen or layer) object
+ * @param {object} target - The target screen or layer object
+ * @return {object} Current object after creating
+ * @example
+ * 	var scrn = new Screen('myScreen');
+ * 	var scrn2 = new Screen('myOtherScreen');
+ * 	var myComp = new Component('myComp', scrn, {
+ * 		type: 'img',
+ * 		classes: 'class1 class2',
+ * 		image: {
+ * 			path:'path/to/img.png',
+ * 			alt: 'alt Img Name',
+ * 			title: 'title of image'
+ * 		}
+ * 	});
+ * 	myComp.changeParent(scrn, scrn2);
  */
-
 Component.prototype.changeParent = function(current, target) {
 	document.getElementById(target.name).appendChild(document.getElementById(this.name));
 	target[this.name] = this;

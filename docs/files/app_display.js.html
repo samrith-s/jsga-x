@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>app/display.js - jsga</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="jsga" src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Industry-Circuit-icon.png" style="max-height: 65%;" title="jsga">
+        
+            jsga
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.6</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes..." data-obj='["classes/Component", "classes/Currency", "classes/HUD", "classes/Layer", "classes/Menu", "classes/Screen", "classes/Timer", "classes/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>Classes</h3>
+    <div id="sidebar">
+        
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter Classes">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Component.html">Component</a></li>
+                    
+                        <li><a href="../classes/Currency.html">Currency</a></li>
+                    
+                        <li><a href="../classes/HUD.html">HUD</a></li>
+                    
+                        <li><a href="../classes/Layer.html">Layer</a></li>
+                    
+                        <li><a href="../classes/Menu.html">Menu</a></li>
+                    
+                        <li><a href="../classes/Screen.html">Screen</a></li>
+                    
+                        <li><a href="../classes/Timer.html">Timer</a></li>
+                    
+                        <li><a href="../classes/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>app/display.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+
+/**
+ * Screen class that allows creation of new screens
+ *
+ * @class  Screen
+ * 
+ * @param {string} name - A unique name for the screen
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ */
+function Screen(name) {
+
+	this.name = name.replace(/\s+/g, &quot;&quot;);
+
+	var screen_ = document.createElement(&quot;ga-screen&quot;);
+	screen_.id = this.name; 
+
+	document.getElementsByTagName(&#x27;ga-jsga&#x27;)[0].appendChild(screen_);
+
+	this.$ = $(&#x27;#&#x27; + this.name);
+
+	this.DOM = document.getElementById(this.name);
+
+	$Screens.all.push(this);
+
+	return this;
+}
+
+var $Screens = {};		//Global variable containing all screen
+$Screens.all = [];		//Array of all created screens
+
+//a function to find screen by name from all screens created
+$Screens.find = function(name) {
+	for(var i=0,len=$Screens.all.length; i&lt;len; i++)
+		if($Screens.all[i].name===name)
+			return $Screens.all[i];
+}
+
+/**
+ * Layer class that allows creation of new layers 
+ *
+ * @class  Layer
+ * 
+ * @param {string} name - A unique name for the layer
+ * @param {object} target - A screen or layer object to add the layer to
+ * @param {object} [options] - A JSON object of options
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ * 	var layr = new Layer(&#x27;myScreen&#x27;, scrn, {col:12, row: &#x27;auto&#x27;, x:0, y:0});
+ */
+function Layer(name, screen, options) {
+
+	var settings = $.extend({
+		col: 12,
+		row: &#x27;auto&#x27;,
+		x: 0,
+		y: 0
+	}, options);
+
+	this.name = name.replace(/\s+/g, &quot;&quot;);
+
+	var layer_ = document.createElement(&quot;ga-layer&quot;);
+	layer_.id = this.name;
+	layer_.className = &#x27;col-&#x27; + settings.col + &#x27; row-&#x27; + settings.row + &#x27; x-&#x27; + settings.x + &#x27; y-&#x27; + settings.y;
+
+	document.getElementById(screen.name).appendChild(layer_);
+
+	screen[this.name] = this;
+	this.$ = $(&#x27;#&#x27; + this.name);
+
+	this.DOM = document.getElementById(this.name);
+
+	$Layers.all.push(this);
+
+	return this;
+}
+
+var $Layers = {};		//Global variable containing all Layer
+$Layers.all = [];		//Array of all created layers		
+
+//a function to find screen by name from all screens created
+$Layers.find = function(name) {
+	for(var i=0,len=$Layers.all.length; i&lt;len; i++)
+		if($Layers.all[i].name===name)
+			return $Layers.all[i];
+}
+
+/**
+ * Change the current parent container of the layer or component object
+ *
+ * @method changeParent
+ * @param {object} current - The current parent (screen or layer) object
+ * @param {object} target - The target screen or layer object
+ * @return {object} Current object after creating
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ * 	var scrn2 = new Screen(&#x27;myOtherScreen&#x27;);
+ * 	var layr = new Layer(&#x27;myLayer&#x27;, scrn);
+ * 	layr.changeParent(scrn, scrn2);
+ */
+Layer.prototype.changeParent = function(current, target) {
+	document.getElementById(target.name).appendChild(document.getElementById(this.name));
+	target[this.name] = this;
+	delete current[this.name];
+	return this;
+}
+
+/**
+ * Component class allows creation of new components 
+ *
+ * @class  Component
+ * 
+ * @param {string} name - A unique name for the component
+ * @param {object} target - A screen or layer object to add the component to
+ * @param {object} [options] - A JSON object of options
+ * @return {object} Current object after creating
+ * @constructor
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ * 	var layr = new Layer(&#x27;myScreen&#x27;, scrn);
+ * 	var myComp = new Component(&#x27;myComponent&#x27;, layr, {
+ * 		type: &#x27;img&#x27;,
+ * 		classes: &#x27;class1 class2&#x27;,
+ * 		image: {
+ * 			path:&#x27;path/to/img.png&#x27;,
+ * 			alt: &#x27;alt Img Name&#x27;,
+ * 			title: &#x27;title of image&#x27;
+ * 		}
+ * 	});
+ */
+function Component(name, layer, options) {
+
+	var settings = $.extend({
+		type: &#x27;div&#x27;,
+		classes: &#x27;&#x27;,
+		text: &#x27;&#x27;,
+		image: {
+			path: &#x27;&#x27;,
+			alt: &#x27;&#x27;,
+			title: &#x27;&#x27;
+		}
+	}, options);
+
+	this.name = name.replace(/\s+/g, &quot;&quot;);
+
+	var component_ = document.createElement(settings.type);
+	component_.id = this.name;
+	component_.className = &#x27;ga-component&#x27; + &#x27; &#x27; + settings.classes;
+
+	if(settings.text!==&#x27;&#x27; || settings.text!==null) {
+		var componentTxt_ = document.createTextNode(settings.text);
+		component_.appendChild(componentTxt_);
+	}
+
+	if(settings.type===&#x27;img&#x27;) {
+		component_.src = settings.image.path;
+		component_.alt = settings.image.alt;
+		component_.title = settings.image.title;
+	}
+
+	document.getElementById(layer.name).appendChild(component_);
+
+	layer[this.name] = this;
+	this.$ = $(&#x27;#&#x27; + this.name);
+
+	this.DOM = document.getElementById(this.name);
+
+	$Components.all.push(this);
+
+	return this;
+}
+
+var $Components = {};		//Global variable containing all Component
+$Components.all = [];		//Array of all created component
+
+//a function to find screen by name from all screens created
+$Components.find = function(name) {
+	for(var i=0,len=$Components.all.length; i&lt;len; i++)
+		if($Components.all[i].name===name)
+			return $Components.all[i];
+}
+
+/**
+ * Change the current parent container of the layer or component object
+ *
+ * @method changeParent
+ * @param {object} current - The current parent (screen or layer) object
+ * @param {object} target - The target screen or layer object
+ * @return {object} Current object after creating
+ * @example
+ * 	var scrn = new Screen(&#x27;myScreen&#x27;);
+ * 	var scrn2 = new Screen(&#x27;myOtherScreen&#x27;);
+ * 	var myComp = new Component(&#x27;myComp&#x27;, scrn, {
+ * 		type: &#x27;img&#x27;,
+ * 		classes: &#x27;class1 class2&#x27;,
+ * 		image: {
+ * 			path:&#x27;path/to/img.png&#x27;,
+ * 			alt: &#x27;alt Img Name&#x27;,
+ * 			title: &#x27;title of image&#x27;
+ * 		}
+ * 	});
+ * 	myComp.changeParent(scrn, scrn2);
+ */
+Component.prototype.changeParent = function(current, target) {
+	document.getElementById(target.name).appendChild(document.getElementById(this.name));
+	target[this.name] = this;
+	delete current[this.name];
+	return this;
+}
+
+
+
+
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

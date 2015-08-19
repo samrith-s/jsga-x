@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>app/currency.js - jsga</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+        
+	    <img alt="jsga" src="http://icons.iconarchive.com/icons/icons8/windows-8/256/Industry-Circuit-icon.png" style="max-height: 65%;" title="jsga">
+        
+            jsga
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.6</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes..." data-obj='["classes/Component", "classes/Currency", "classes/HUD", "classes/Layer", "classes/Menu", "classes/Screen", "classes/Timer", "classes/Util"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+    <h3>Classes</h3>
+    <div id="sidebar">
+        
+        <div id="api-tabview-filter">
+            <input type="search" placeholder="Type to filter Classes">
+        </div>
+
+        <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+            <div class="tab-pane active" id="classes">
+                <ul id="api-classes" class="nav nav-list">
+                    
+                        <li><a href="../classes/Component.html">Component</a></li>
+                    
+                        <li><a href="../classes/Currency.html">Currency</a></li>
+                    
+                        <li><a href="../classes/HUD.html">HUD</a></li>
+                    
+                        <li><a href="../classes/Layer.html">Layer</a></li>
+                    
+                        <li><a href="../classes/Menu.html">Menu</a></li>
+                    
+                        <li><a href="../classes/Screen.html">Screen</a></li>
+                    
+                        <li><a href="../classes/Timer.html">Timer</a></li>
+                    
+                        <li><a href="../classes/Util.html">Util</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="tab-pane" id="modules">
+                <ul id="api-modules" class="nav nav-list">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+        Show:
+        <label for="api-show-deprecated" class="checkbox">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </form>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>app/currency.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+
+var Currencies={};
+
+Currencies.all = [];
+
+Currencies.find = function(name) {
+	for(var i=0,len=Currencies.all.length; i&lt;len; i++)
+		if(Currencies.all[i].name===name)
+			return Currencies.all[i];
+}
+
+/**
+ * Currency class that allows creation of new currencies like health, coins etc and allows effective management. Part of the game logic element.
+ * @class  Currency
+ * @constructor
+ * @param {string} name - A unique name for the currency
+ * @param {int} min - Minimum value of currency
+ * @param {int} max - Maximum value of currency
+ * @param {int} value - Value to initialize currency with
+ * @params {object} [options] - Pass a JSON object of options
+ * @return {object} Current object after creating
+ * @example
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 100, {callback: myFunct(), icon:&#x27;../../myicon.png&#x27;});
+ */
+function Currency(name, min, max, value, options) {
+
+	var settings = $.extend({
+		callback: function() {},
+		icon: &quot;&quot;
+	}, options);
+
+	this.name = name;
+	this.min = min;
+	this.max = max;
+	this.val = value;
+
+	Currencies.all.push(this);
+
+	if(settings.callback &amp;&amp; typeof settings.callback === &#x27;function&#x27;)
+		this.callback = settings.callback;
+	else
+		console.error(&quot;Currency: callback is not a function&quot;);
+
+	if(settings.icon &amp;&amp; settings.icon!==&quot;&quot;)
+		this.icon=settings.icon
+
+	return this;
+}
+
+/**
+ * Function to increase the currency by a certain value
+ *
+ * @method  increase
+ * @param {int} value - Value to increase currency by
+ * @chainable
+ * @return {object} Current object after updating
+ * @example
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100. 0);
+ * 	health.increase(10); //increases health from 0 -&gt; 10
+ */
+Currency.prototype.increase = function(value) {
+	this.value += value;
+	this.callback(value);
+	
+	return this;
+}
+
+/**
+ * Function to decrease the currency by a certain value
+ *
+ * @method  decrease
+ * @param {int} value - Value to decrease currency by
+ * @chainable
+ * @return {object} Current object after updating
+ * @example
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 10);
+ * 	health.decrease(10); //decrease health from 10-&gt;0
+ */
+Currency.prototype.decrease = function(value) {
+	this.value -= value;
+	this.callback();
+
+	return this;
+}
+
+/**
+ * Function to check if value of currency is equal to it&#x27;s maximum value
+ *
+ * @method  isMax
+ * @return {bool} Returns either true or false
+ * @readOnly
+ * @example
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 10);
+ * 	var isMx = health.isMax(); //will return true or false after checking
+ */
+Currency.prototype.isMax = function() {
+	if(this.value===this.max)
+		return true;
+	else
+		return false;
+}
+
+/**
+ * Function to check if value of currency is equal to it&#x27;s minimum value
+ *
+ * @method  isMin
+ * @return {bool} Returns either true or false
+ * @readOnly
+ * @example
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 10);
+ * 	var isMn = health.isMin(); //will return true or false after checking
+ */
+Currency.prototype.isMin = function() {
+	if(this.value===this.min)
+		return true;
+	else
+		return false;
+}
+
+/**
+ * Function to check if value of currency is equal to it&#x27;s minimum value
+ *
+ * @method  val
+ * @return {int} Returns the current value of the currency
+ * @readOnly
+ * @example
+ * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 10);
+ * 	var isMn = health.val(); //will return the current value
+ */
+Currency.prototype.val = function() {
+	return this.value;
+}
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
