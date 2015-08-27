@@ -8,6 +8,10 @@
  * @param {object} target - A screen or layer object to add the component to
  * @param {array} currencies - An array of currency objects
  * @param {object} [options] A JSON object of options
+ * @param {string} [options.col] The column (between 1-12) to specify the width of the HUD. Accepts 'auto', too
+ * @param {string} [options.row] The row (1-12) to specify the height of the HUD. Accepts 'auto', too
+ * @param {string} [options.x] The left position based on the grid (0 - 12).
+ * @param {string} [options.y] The top position based on the grid (0 - 12).
  * @return {object} Current object after creating
  * @constructor
  * @example

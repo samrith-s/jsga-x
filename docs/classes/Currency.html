@@ -36,7 +36,7 @@
     <div class="row">
         <div class="span3">
 	    <div>
-	<h3>Classes</h3>
+	<h3>APIs</h3>
 	<div id="sidebar">
 		<ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0; display:none;">
 			<li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
@@ -307,6 +307,40 @@
                     </div>
 
                     
+                        <ul class="params-list">
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[callback]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>Pass a function to call after every increae, decrease action performed on the currency</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                            <li class="param">
+                                
+                                    <code class="param-name optional">[icon]</code>
+                                    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                                    <span class="flag optional" title="This parameter is optional.">optional</span>
+                                
+
+                                <div class="param-description">
+                                    <p>An icon associated with the currency</p>
+
+                                </div>
+
+                                
+                            </li>
+                            
+                        </ul>
+                    
                 </li>
             
             </ul>
@@ -334,7 +368,14 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var health = new Currency(&#39;health&#39;, 0, 100, 100, {callback: myFunct(), icon:&#39;../../myicon.png&#39;});</code></pre>
+                <pre class="code prettyprint"><code>//example option object
+{
+    callback: function() {
+        alert("Hello world!");
+    },
+    icon: "/path/to/my/currency/icon.jpg"
+}</code></pre>
+<pre class="code prettyprint"><code>var health = new Currency(&#39;health&#39;, 0, 100, 100, {callback: myFunct(), icon:&#39;../../myicon.png&#39;});</code></pre>
 
             </div>
         </div>

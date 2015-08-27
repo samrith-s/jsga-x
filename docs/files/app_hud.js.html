@@ -36,7 +36,7 @@
     <div class="row">
         <div class="span3">
 	    <div>
-	<h3>Classes</h3>
+	<h3>APIs</h3>
 	<div id="sidebar">
 		<ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0; display:none;">
 			<li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
@@ -107,6 +107,10 @@
  * @param {object} target - A screen or layer object to add the component to
  * @param {array} currencies - An array of currency objects
  * @param {object} [options] A JSON object of options
+ * @param {string} [options.col] The column (between 1-12) to specify the width of the HUD. Accepts &#x27;auto&#x27;, too
+ * @param {string} [options.row] The row (1-12) to specify the height of the HUD. Accepts &#x27;auto&#x27;, too
+ * @param {string} [options.x] The left position based on the grid (0 - 12).
+ * @param {string} [options.y] The top position based on the grid (0 - 12).
  * @return {object} Current object after creating
  * @constructor
  * @example

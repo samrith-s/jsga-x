@@ -18,6 +18,16 @@ Currencies.find = function(name) {
  * @param {int} max - Maximum value of currency
  * @param {int} value - Value to initialize currency with
  * @params {object} [options] - Pass a JSON object of options
+ * @params {function} [options.callback] Pass a function to call after every increae, decrease action performed on the currency
+ * @params {string} [options.icon] An icon associated with the currency
+ * @example
+ * 	//example option object
+ * 	{
+ * 		callback: function() {
+ * 			alert("Hello world!");
+ * 		},
+ * 		icon: "/path/to/my/currency/icon.jpg"
+ * 	}
  * @return {object} Current object after creating
  * @example
  * 	var health = new Currency('health', 0, 100, 100, {callback: myFunct(), icon:'../../myicon.png'});

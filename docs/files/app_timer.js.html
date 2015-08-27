@@ -36,7 +36,7 @@
     <div class="row">
         <div class="span3">
 	    <div>
-	<h3>Classes</h3>
+	<h3>APIs</h3>
 	<div id="sidebar">
 		<ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0; display:none;">
 			<li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
@@ -249,7 +249,13 @@ Timer.prototype.onChange = function(interval, callback) {
  *
  * @method  display
  * @param {object} target - Screen or layer object to embed the timer in
- * @param {optionsHash} options
+ * @param {object} options - A JSON object of options
+ * @param {string} [options.iconPath] Path to the icon for the timer
+ * @param {bool} [options.showIcon] Set whether to display the icon for the timer or not
+ * @param {string} [options.col] The column (between 1-12) to specify the width of the HUD. Accepts &#x27;auto&#x27;, too
+ * @param {string} [options.row] The row (1-12) to specify the height of the HUD. Accepts &#x27;auto&#x27;, too
+ * @param {string} [options.x] The left position based on the grid (0 - 12).
+ * @param {string} [options.y] The top position based on the grid (0 - 12).
  * @return {object} Current object after updating
  * @chainable
  * @example
@@ -262,9 +268,9 @@ Timer.prototype.display = function(target, options) {
 	var settings = $.extend({
 		showIcon: false,
 		iconPath: &quot;http://icons.iconarchive.com/icons/custom-icon-design/flatastic-11/256/Arrows-icon.png&quot;,
-		col: 3,
+		col: 4,
 		row: &#x27;auto&#x27;,
-		x: 8,
+		x: 7,
 		y: 0
 	}, options);
 

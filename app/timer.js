@@ -150,7 +150,13 @@ Timer.prototype.onChange = function(interval, callback) {
  *
  * @method  display
  * @param {object} target - Screen or layer object to embed the timer in
- * @param {optionsHash} options
+ * @param {object} options - A JSON object of options
+ * @param {string} [options.iconPath] Path to the icon for the timer
+ * @param {bool} [options.showIcon] Set whether to display the icon for the timer or not
+ * @param {string} [options.col] The column (between 1-12) to specify the width of the HUD. Accepts 'auto', too
+ * @param {string} [options.row] The row (1-12) to specify the height of the HUD. Accepts 'auto', too
+ * @param {string} [options.x] The left position based on the grid (0 - 12).
+ * @param {string} [options.y] The top position based on the grid (0 - 12).
  * @return {object} Current object after updating
  * @chainable
  * @example
@@ -163,9 +169,9 @@ Timer.prototype.display = function(target, options) {
 	var settings = $.extend({
 		showIcon: false,
 		iconPath: "http://icons.iconarchive.com/icons/custom-icon-design/flatastic-11/256/Arrows-icon.png",
-		col: 3,
+		col: 4,
 		row: 'auto',
-		x: 8,
+		x: 7,
 		y: 0
 	}, options);
 

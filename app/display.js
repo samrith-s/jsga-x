@@ -46,6 +46,10 @@ $Screens.find = function(name) {
  * @param {string} name - A unique name for the layer
  * @param {object} target - A screen or layer object to add the layer to
  * @param {object} [options] - A JSON object of options
+ * @param {string} [options.col] The column (between 1-12) to specify the width of the Layer. Accepts 'auto', too
+ * @param {string} [options.row] The row (1-12) to specify the height of the HUD. Accepts 'auto', too
+ * @param {string} [options.x] The left position based on the grid (0 - 12) 
+ * @param {string} [options.y] The top position based on the grid (0 - 12)
  * @return {object} Current object after creating
  * @constructor
  * @example
@@ -117,6 +121,13 @@ Layer.prototype.changeParent = function(current, target) {
  * @param {string} name - A unique name for the component
  * @param {object} target - A screen or layer object to add the component to
  * @param {object} [options] - A JSON object of options
+ * @param {string} [options.type] The type of element to create. Accept all HTML and custom tags as input
+ * @param {string} [options.classes] Custom classes to add to the component. More classes can always be added later
+ * @param {string} [options.text] The text to be container within the element
+ * @param {string} [options.image] If creating an image, these params are necessary
+ * @param {string} [options.image.path] The path to the image
+ * @param {string} [options.image.alt] Alternate name for image. Leave blank for no alternate name
+ * @param {title} [options.image.title] The title for the image. Leave blank for no title
  * @return {object} Current object after creating
  * @constructor
  * @example

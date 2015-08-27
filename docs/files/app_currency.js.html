@@ -36,7 +36,7 @@
     <div class="row">
         <div class="span3">
 	    <div>
-	<h3>Classes</h3>
+	<h3>APIs</h3>
 	<div id="sidebar">
 		<ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0; display:none;">
 			<li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
@@ -117,6 +117,16 @@ Currencies.find = function(name) {
  * @param {int} max - Maximum value of currency
  * @param {int} value - Value to initialize currency with
  * @params {object} [options] - Pass a JSON object of options
+ * @params {function} [options.callback] Pass a function to call after every increae, decrease action performed on the currency
+ * @params {string} [options.icon] An icon associated with the currency
+ * @example
+ * 	//example option object
+ * 	{
+ * 		callback: function() {
+ * 			alert(&quot;Hello world!&quot;);
+ * 		},
+ * 		icon: &quot;/path/to/my/currency/icon.jpg&quot;
+ * 	}
  * @return {object} Current object after creating
  * @example
  * 	var health = new Currency(&#x27;health&#x27;, 0, 100, 100, {callback: myFunct(), icon:&#x27;../../myicon.png&#x27;});

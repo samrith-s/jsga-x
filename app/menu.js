@@ -6,7 +6,10 @@
  * @param {string} name - A unique name for the Menu
  * @param {object} screen - Name of the screen
  * @param {object} options - Pass a JSON object of options
- * @property {object} options options for this lalala
+ * @param {string} [options.col] The column (between 1-12) to specify the width of the HUD. Accepts 'auto', too
+ * @param {string} [options.row] The row (1-12) to specify the height of the HUD. Accepts 'auto', too
+ * @param {string} [options.x] The left position based on the grid (0 - 12).
+ * @param {string} [options.y] The top position based on the grid (0 - 12).
  * @constructor
  * @return {object} Current object after creating
  * @example

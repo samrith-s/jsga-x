@@ -102,16 +102,31 @@
                     "name": "options",
                     "description": "- Pass a JSON object of options",
                     "type": "Object",
-                    "optional": true
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "callback",
+                            "description": "Pass a function to call after every increae, decrease action performed on the currency",
+                            "type": "Function",
+                            "optional": true
+                        },
+                        {
+                            "name": "icon",
+                            "description": "An icon associated with the currency",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
                 }
+            ],
+            "example": [
+                "\n\t//example option object\n\t{\n\t\tcallback: function() {\n\t\t\talert(\"Hello world!\");\n\t\t},\n\t\ticon: \"/path/to/my/currency/icon.jpg\"\n\t}",
+                "\n\tvar health = new Currency('health', 0, 100, 100, {callback: myFunct(), icon:'../../myicon.png'});"
             ],
             "return": {
                 "description": "Current object after creating",
                 "type": "Object"
-            },
-            "example": [
-                "\n\tvar health = new Currency('health', 0, 100, 100, {callback: myFunct(), icon:'../../myicon.png'});"
-            ]
+            }
         },
         "Screen": {
             "name": "Screen",
@@ -166,7 +181,33 @@
                     "name": "options",
                     "description": "- A JSON object of options",
                     "type": "Object",
-                    "optional": true
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "col",
+                            "description": "The column (between 1-12) to specify the width of the Layer. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "row",
+                            "description": "The row (1-12) to specify the height of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "x",
+                            "description": "The left position based on the grid (0 - 12)",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "y",
+                            "description": "The top position based on the grid (0 - 12)",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
                 }
             ],
             "return": {
@@ -187,7 +228,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "app/display.js",
-            "line": 112,
+            "line": 116,
             "description": "Component class allows creation of new components",
             "params": [
                 {
@@ -204,7 +245,53 @@
                     "name": "options",
                     "description": "- A JSON object of options",
                     "type": "Object",
-                    "optional": true
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "type",
+                            "description": "The type of element to create. Accept all HTML and custom tags as input",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "classes",
+                            "description": "Custom classes to add to the component. More classes can always be added later",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "text",
+                            "description": "The text to be container within the element",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "image",
+                            "description": "If creating an image, these params are necessary",
+                            "type": "String",
+                            "optional": true,
+                            "props": [
+                                {
+                                    "name": "path",
+                                    "description": "The path to the image",
+                                    "type": "String",
+                                    "optional": true
+                                },
+                                {
+                                    "name": "alt",
+                                    "description": "Alternate name for image. Leave blank for no alternate name",
+                                    "type": "String",
+                                    "optional": true
+                                },
+                                {
+                                    "name": "title",
+                                    "description": "The title for the image. Leave blank for no title",
+                                    "type": "Title",
+                                    "optional": true
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "return": {
@@ -247,7 +334,33 @@
                     "name": "options",
                     "description": "A JSON object of options",
                     "type": "Object",
-                    "optional": true
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "col",
+                            "description": "The column (between 1-12) to specify the width of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "row",
+                            "description": "The row (1-12) to specify the height of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "x",
+                            "description": "The left position based on the grid (0 - 12).",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "y",
+                            "description": "The top position based on the grid (0 - 12).",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
                 }
             ],
             "return": {
@@ -284,11 +397,35 @@
                 {
                     "name": "options",
                     "description": "- Pass a JSON object of options",
-                    "type": "Object"
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "col",
+                            "description": "The column (between 1-12) to specify the width of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "row",
+                            "description": "The row (1-12) to specify the height of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "x",
+                            "description": "The left position based on the grid (0 - 12).",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "y",
+                            "description": "The top position based on the grid (0 - 12).",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
                 }
             ],
-            "itemtype": "property",
-            "type": "Object",
             "is_constructor": 1,
             "return": {
                 "description": "Current object after creating",
@@ -351,7 +488,7 @@
     "classitems": [
         {
             "file": "app/currency.js",
-            "line": 50,
+            "line": 60,
             "description": "Function to increase the currency by a certain value",
             "itemtype": "method",
             "name": "increase",
@@ -374,7 +511,7 @@
         },
         {
             "file": "app/currency.js",
-            "line": 68,
+            "line": 78,
             "description": "Function to decrease the currency by a certain value",
             "itemtype": "method",
             "name": "decrease",
@@ -397,7 +534,7 @@
         },
         {
             "file": "app/currency.js",
-            "line": 86,
+            "line": 96,
             "description": "Function to check if value of currency is equal to it's maximum value",
             "itemtype": "method",
             "name": "isMax",
@@ -413,7 +550,7 @@
         },
         {
             "file": "app/currency.js",
-            "line": 103,
+            "line": 113,
             "description": "Function to check if value of currency is equal to it's minimum value",
             "itemtype": "method",
             "name": "isMin",
@@ -429,7 +566,7 @@
         },
         {
             "file": "app/currency.js",
-            "line": 120,
+            "line": 130,
             "description": "Function to check if value of currency is equal to it's minimum value",
             "itemtype": "method",
             "name": "val",
@@ -445,7 +582,7 @@
         },
         {
             "file": "app/display.js",
-            "line": 92,
+            "line": 96,
             "description": "Change the current parent container of the layer or component object",
             "itemtype": "method",
             "name": "changeParent",
@@ -472,7 +609,7 @@
         },
         {
             "file": "app/display.js",
-            "line": 187,
+            "line": 198,
             "description": "Change the current parent container of the layer or component object",
             "itemtype": "method",
             "name": "changeParent",
@@ -610,8 +747,46 @@
                 },
                 {
                     "name": "options",
-                    "description": "",
-                    "type": "OptionsHash"
+                    "description": "- A JSON object of options",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "iconPath",
+                            "description": "Path to the icon for the timer",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "showIcon",
+                            "description": "Set whether to display the icon for the timer or not",
+                            "type": "Bool",
+                            "optional": true
+                        },
+                        {
+                            "name": "col",
+                            "description": "The column (between 1-12) to specify the width of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "row",
+                            "description": "The row (1-12) to specify the height of the HUD. Accepts 'auto', too",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "x",
+                            "description": "The left position based on the grid (0 - 12).",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "y",
+                            "description": "The top position based on the grid (0 - 12).",
+                            "type": "String",
+                            "optional": true
+                        }
+                    ]
                 }
             ],
             "return": {
@@ -697,6 +872,14 @@
         }
     ],
     "warnings": [
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app/currency.js:12"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app/currency.js:12"
+        },
         {
             "message": "replacing incorrect tag: params with param",
             "line": " app/currency.js:12"
